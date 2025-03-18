@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Util.im API - 实用工具</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/components/prism-json.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism-tomorrow.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <nav class="bg-gray-800 text-white py-4">
+        <div class="container mx-auto px-4">
+          <div class="flex flex-wrap items-center justify-between">
+            <!-- Logo/Brand -->
+            <div class="flex items-center">
+              <a href="/" class="text-xl font-bold">Util.im API</a>
+            </div>
+      
+            <!-- Language and GitHub -->
+            <div class="flex items-center space-x-4">
+              <!-- Language Selector -->
+              <div class="relative">
+                <select id="language-selector" class="appearance-none bg-gray-700 text-white px-3 py-1 pr-8 rounded cursor-pointer hover:bg-gray-600 transition duration-200">
+                  <option value="it">Italiano</option>
+                  <option value="en">English</option>
+                  <option value="zh" selected>中文</option>
+                </select>
+                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white">
+                  <svg class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                  </svg>
+                </div>
+              </div>
+      
+              <!-- GitHub Link -->
+              <a href="https://github.com/1zkn/util.im" class="flex items-center hover:text-purple-400 transition duration-200">
+                <svg class="h-5 w-5 mr-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+                GitHub
+              </a>
+            </div>
+      
+        </nav>
+  <!-- Hero Section -->
+  <header class="bg-gradient-to-r from-purple-600 to-blue-500 text-white">
+    <div class="container mx-auto px-4 py-16">
+      <div class="flex flex-col items-center text-center">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">Util.im API</h1>
+        <p class="text-xl md:text-2xl max-w-2xl opacity-90">为开发者提供简单而强大的实用工具API集合</p>
+        <div class="mt-8">
+          <a href="#endpoints" class="bg-white text-purple-600 font-medium px-6 py-3 rounded-lg shadow-md hover:bg-gray-100 transition duration-200">探索API</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Features Section -->
+  <section class="py-12 md:py-20">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center mb-12">主要特点</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center mb-4">
+            <i class="fas fa-lock-open text-xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-2">无需认证</h3>
+          <p class="text-gray-600">易于使用的API，无需认证或令牌。</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mb-4">
+            <i class="fas fa-bolt text-xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-2">快速可靠</h3>
+          <p class="text-gray-600">针对出色性能和快速响应时间优化的端点。</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <div class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-4">
+            <i class="fas fa-code text-xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-2">JSON格式</h3>
+          <p class="text-gray-600">易于集成到项目中的JSON格式响应。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- API Endpoints Section -->
+  <section id="endpoints" class="py-12 md:py-20 bg-gray-100">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center mb-12">API端点</h2>
+      
+      <!-- UUID -->
+      <div class="bg-white rounded-lg shadow-md mb-8 overflow-hidden">
+        <div class="bg-purple-600 text-white p-4">
+          <h3 class="text-xl font-bold flex items-center">
+            <i class="fas fa-fingerprint mr-2"></i>
+            UUID生成
+          </h3>
+        </div>
+        <div class="p-6">
+          <div class="flex flex-wrap items-center mb-4">
+            <span class="bg-green-500 text-white text-sm font-semibold px-3 py-1 rounded mr-2 mb-2">GET</span>
+            <code class="bg-gray-100 px-3 py-1 rounded text-gray-800 font-mono mb-2">/uuid</code>
+          </div>
+          <p class="text-gray-600 mb-4">生成随机v4 UUID。</p>
+          
+          <div class="mb-4">
+            <h4 class="font-semibold mb-2">参数：</h4>
+            <ul class="list-disc pl-5 text-gray-600">
+              <li><code>json</code>（可选）：如提供，响应将以JSON格式返回。</li>
+            </ul>
+          </div>
+          
+          <div class="mb-4">
+            <h4 class="font-semibold mb-2">示例：</h4>
+            <div class="bg-gray-100 p-3 rounded font-mono text-sm mb-2">
+              <code>/uuid</code>
+            </div>
+            <div class="bg-gray-100 p-3 rounded font-mono text-sm">
+              <code>/uuid?json=true</code>
+            </div>
+          </div>
+          
+          <div>
+            <h4 class="font-semibold mb-2">响应：</h4>
+            <pre class="language-json rounded"><code>{ "success": true, "uuid": "550e8400-e29b-41d4-a716-446655440000" }</code></pre>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Random Number -->
+      <div class="bg-white rounded-lg shadow-md mb-8 overflow-hidden">
+        <div class="bg-blue-600 text-white p-4">
+          <h3 class="text-xl font-bold flex items-center">
+            <i class="fas fa-dice mr-2"></i>
+            随机数生成
+          </h3>
+        </div>
+        <div class="p-6">
+          <div class="flex flex-wrap items-center mb-4">
+            <span class="bg-green-500 text-white text-sm font-semibold px-3 py-1 rounded mr-2 mb-2">GET</span>
+            <code class="bg-gray-100 px-3 py-1 rounded text-gray-800 font-mono mb-2">/random/number</code>
+          </div>
+          <p class="text-gray-600 mb-4">在指定范围内生成随机数。</p>
+          
+          <div class="mb-4">
+            <h4 class="font-semibold mb-2">参数：</h4>
+            <ul class="list-disc pl-5 text-gray-600">
+              <li><code>min</code>（可选，默认=1）：最小值。</li>
+              <li><code>max</code>（可选，默认=100）：最大值。</li>
+              <li><code>json</code>（可选）：如提供，响应将以JSON格式返回。</li>
+            </ul>
+          </div>
+          
+          <div class="mb-4">
+            <h4 class="font-semibold mb-2">示例：</h4>
+            <div class="bg-gray-100 p-3 rounded font-mono text-sm mb-2">
+              <code>/random/number?min=10&max=50</code>
+            </div>
+            <div class="bg-gray-100 p-3 rounded font-mono text-sm">
+              <code>/random/number?json=true</code>
+            </div>
+          </div>
+          
+          <div>
+            <h4 class="font-semibold mb-2">响应：</h4>
+            <pre class="language-json rounded"><code>{ "success": true, "number": 27 }</code></pre>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Random String -->
+      <div class="bg-white rounded-lg shadow-md mb-8 overflow-hidden">
+        <div class="bg-indigo-600 text-white p-4">
+          <h3 class="text-xl font-bold flex items-center">
+            <i class="fas fa-font mr-2"></i>
+            随机字符串生成
+          </h3>
+        </div>
+        <div class="p-6">
+          <div class="flex flex-wrap items-center mb-4">
+            <span class="bg-green-500 text-white text-sm font-semibold px-3 py-1 rounded mr-2 mb-2">GET</span>
+            <code class="bg-gray-100 px-3 py-1 rounded text-gray-800 font-mono mb-2">/random/string</code>
+          </div>
+          <div class="flex flex-wrap items-center mb-4">
+            <span class="bg-green-500 text-white text-sm font-semibold px-3 py-1 rounded mr-2 mb-2">GET</span>
+            <code class="bg-gray-100 px-3 py-1 rounded text-gray-800 font-mono mb-2">/random/string/:length</code>
+          </div>
+          <p class="text-gray-600 mb-4">生成指定长度的随机字符串。</p>
+          
+          <div class="mb-4">
+            <h4 class="font-semibold mb-2">参数：</h4>
+            <ul class="list-disc pl-5 text-gray-600">
+              <li><code>length</code>（路径或查询参数，可选，默认=10）：随机字符串的长度。</li>
+              <li><code>json</code>（可选）：如提供，响应将以JSON格式返回。</li>
+            </ul>
+          </div>
+          
+          <div class="mb-4">
+            <h4 class="font-semibold mb-2">示例：</h4>
+            <div class="bg-gray-100 p-3 rounded font-mono text-sm mb-2">
+              <code>/random/string</code>
+            </div>
+            <div class="bg-gray-100 p-3 rounded font-mono text-sm mb-2">
+              <code>/random/string/16</code>
+            </div>
+            <div class="bg-gray-100 p-3 rounded font-mono text-sm">
+              <code>/random/string?length=20&json=true</code>
+            </div>
+          </div>
+          
+          <div>
+            <h4 class="font-semibold mb-2">响应：</h4>
+            <pre class="language-json rounded"><code>{ "success": true, "randomStr": "aBcD1234EfgH" }</code></pre>
+          </div>
+        </div>
+      </div>
+      
+      <!-- QR Code -->
+      <div class="bg-white rounded-lg shadow-md mb-8 overflow-hidden">
+        <div class="bg-green-600 text-white p-4">
+          <h3 class="text-xl font-bold flex items-center">
+            <i class="fas fa-qrcode mr-2"></i>
+            二维码生成
+          </h3>
+        </div>
+        <div class="p-6">
+          <div class="flex flex-wrap items-center mb-4">
+            <span class="bg-green-500 text-white text-sm font-semibold px-3 py-1 rounded mr-2 mb-2">GET</span>
+            <code class="bg-gray-100 px-3 py-1 rounded text-gray-800 font-mono mb-2">/qr</code>
+          </div>
+          <p class="text-gray-600 mb-4">从指定文本生成二维码。</p>
+          
+          <div class="mb-4">
+            <h4 class="font-semibold mb-2">参数：</h4>
+            <ul class="list-disc pl-5 text-gray-600">
+              <li><code>text</code>（必需）：要编码到二维码中的文本。</li>
+            </ul>
+          </div>
+          
+          <div class="mb-4">
+            <h4 class="font-semibold mb-2">示例：</h4>
+            <div class="bg-gray-100 p-3 rounded font-mono text-sm">
+              <code>/qr?text=ci ao</code>
+            </div>
+          </div>
+          
+          <div>
+            <h4 class="font-semibold mb-2">响应：</h4>
+            <pre class="language-json rounded"><code>{ "success": true, "qr": "<二维码图像（base64格式）>" }</code></pre>
+          </div>
+        </div>
+      </div>
+      
+      <!-- More endpoints collapsed with show more -->
+      <div class="text-center">
+        <button id="showMoreBtn" class="bg-blue-500 hover:bg-blue-600 text-white font-medium px-6 py-3 rounded-lg shadow-md transition duration-200">
+          显示更多端点
+        </button>
+      </div>
+      
+      <div id="moreEndpoints" class="hidden mt-8">
+        <!-- Ping -->
+        <div class="bg-white rounded-lg shadow-md mb-8 overflow-hidden">
+          <div class="bg-yellow-600 text-white p-4">
+            <h3 class="text-xl font-bold flex items-center">
+              <i class="fas fa-network-wired mr-2"></i>
+              Ping测试
+            </h3>
+          </div>
+          <div class="p-6">
+            <div class="flex flex-wrap items-center mb-4">
+              <span class="bg-green-500 text-white text-sm font-semibold px-3 py-1 rounded mr-2 mb-2">GET</span>
+              <code class="bg-gray-100 px-3 py-1 rounded text-gray-800 font-mono mb-2">/ping</code>
+            </div>
+            <div class="flex flex-wrap items-center mb-4">
+              <span class="bg-green-500 text-white text-sm font-semibold px-3 py-1 rounded mr-2 mb-2">GET</span>
+              <code class="bg-gray-100 px-3 py-1 rounded text-gray-800 font-mono mb-2">/ping/:host</code>
+            </div>
+            <p class="text-gray-600 mb-4">验证指定主机的可达性。</p>
+            
+            <div class="mb-4">
+              <h4 class="font-semibold mb-2">参数：</h4>
+              <ul class="list-disc pl-5 text-gray-600">
+                <li><code>host</code>（路径或查询参数，必需）：要测试的主机。</li>
+                <li><code>json</code>（可选）：如提供，响应将以JSON格式返回。</li>
+              </ul>
+            </div>
+            
+            <div class="mb-4">
+              <h4 class="font-semibold mb-2">示例：</h4>
+              <div class="bg-gray-100 p-3 rounded font-mono text-sm mb-2">
+                <code>/ping?host=google.com</code>
+              </div>
+              <div class="bg-gray-100 p-3 rounded font-mono text-sm">
+                <code>/ping/google.com</code>
+              </div>
+            </div>
+            
+            <div>
+              <h4 class="font-semibold mb-2">响应：</h4>
+              <pre class="language-json rounded"><code>{ "ip": "8.8.8.8", "alive": true, "time": "23ms" }</code></pre>
+            </div>
+          </div>
+        </div>
+        
+        <!-- IP -->
+        <div class="bg-white rounded-lg shadow-md mb-8 overflow-hidden">
+          <div class="bg-red-600 text-white p-4">
+            <h3 class="text-xl font-bold flex items-center">
+              <i class="fas fa-map-marker-alt mr-2"></i>
+              IP地址获取
+            </h3>
+          </div>
+          <div class="p-6">
+            <div class="flex flex-wrap items-center mb-4">
+              <span class="bg-green-500 text-white text-sm font-semibold px-3 py-1 rounded mr-2 mb-2">GET</span>
+              <code class="bg-gray-100 px-3 py-1 rounded text-gray-800 font-mono mb-2">/ip</code>
+            </div>
+            <p class="text-gray-600 mb-4">获取请求者的公共IP地址。</p>
+            
+            <div>
+              <h4 class="font-semibold mb-2">响应：</h4>
+              <pre class="language-json rounded"><code>{ "ip": "192.168.1.1" }</code></pre>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Hashing -->
+        <div class="bg-white rounded-lg shadow-md mb-8 overflow-hidden">
+          <div class="bg-purple-800 text-white p-4">
+            <h3 class="text-xl font-bold flex items-center">
+              <i class="fas fa-key mr-2"></i>
+              哈希计算
+            </h3>
+          </div>
+          <div class="p-6">
+            <div class="flex flex-wrap items-center mb-4">
+              <span class="bg-green-500 text-white text-sm font-semibold px-3 py-1 rounded mr-2 mb-2">GET</span>
+              <code class="bg-gray-100 px-3 py-1 rounded text-gray-800 font-mono mb-2">/hash/md5/:text</code>
+            </div>
+            <div class="flex flex-wrap items-center mb-4">
+              <span class="bg-green-500 text-white text-sm font-semibold px-3 py-1 rounded mr-2 mb-2">GET</span>
+              <code class="bg-gray-100 px-3 py-1 rounded text-gray-800 font-mono mb-2">/hash/sha256/:text</code>
+            </div>
+            <div class="flex flex-wrap items-center mb-4">
+              <span class="bg-green-500 text-white text-sm font-semibold px-3 py-1 rounded mr-2 mb-2">GET</span>
+              <code class="bg-gray-100 px-3 py-1 rounded text-gray-800 font-mono mb-2">/hash/sha512/:text</code>
+            </div>
+            <p class="text-gray-600 mb-4">使用MD5、SHA256或SHA512生成提供文本的哈希值。</p>
+            
+            <div class="mb-4">
+              <h4 class="font-semibold mb-2">参数：</h4>
+              <ul class="list-disc pl-5 text-gray-600">
+                <li><code>text</code>（路径或查询参数，必需）：要转换为哈希的文本。</li>
+                <li><code>json</code>（可选）：如提供，响应将以JSON格式返回。</li>
+              </ul>
+            </div>
+            
+            <div class="mb-4">
+              <h4 class="font-semibold mb-2">示例：</h4>
+              <div class="bg-gray-100 p-3 rounded font-mono text-sm mb-2">
+                <code>/hash/md5/ciao</code>
+              </div>
+              <div class="bg-gray-100 p-3 rounded font-mono text-sm">
+                <code>/hash/sha256?text=ciao&json=true</code>
+              </div>
+            </div>
+            
+            <div>
+              <h4 class="font-semibold mb-2">响应：</h4>
+              <pre class="language-json rounded"><code>{ "success": true, "algorithm": "md5", "hash": "5d41402abc4b2a76b9719d911017c592" }</code></pre>
+            </div>
+          </div>
+        </div>
+        
+        <!-- DNS -->
+        <div class="bg-white rounded-lg shadow-md mb-8 overflow-hidden">
+          <div class="bg-blue-800 text-white p-4">
+            <h3 class="text-xl font-bold flex items-center">
+              <i class="fas fa-globe mr-2"></i>
+              DNS查询
+            </h3>
+          </div>
+          <div class="p-6">
+            <div class="flex flex-wrap items-center mb-4">
+              <span class="bg-green-500 text-white text-sm font-semibold px-3 py-1 rounded mr-2 mb-2">GET</span>
+              <code class="bg-gray-100 px-3 py-1 rounded text-gray-800 font-mono mb-2">/dns</code>
+            </div>
+            <p class="text-gray-600 mb-4">解析域名获取其DNS记录。</p>
+            
+            <div class="mb-4">
+              <h4 class="font-semibold mb-2">参数：</h4>
+              <ul class="list-disc pl-5 text-gray-600">
+                <li><code>domain</code>（必需）：域名。</li>
+                <li><code>type</code>（必需）：DNS记录类型（A, AAAA, CNAME, MX, TXT等）。</li>
+                <li><code>dns</code>（可选，默认=<code>1.1.1.1</code>）：要使用的DNS服务器。</li>
+              </ul>
+            </div>
+            
+            <div class="mb-4">
+              <h4 class="font-semibold mb-2">示例：</h4>
+              <div class="bg-gray-100 p-3 rounded font-mono text-sm">
+                <code>/dns?domain=example.com&type=A</code>
+              </div>
+            </div>
+            
+            <div>
+              <h4 class="font-semibold mb-2">响应：</h4>
+              <pre class="language-json rounded"><code>{ "success": true, "records": [{ "ip": "93.184.216.34" }] }</code></pre>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Base64 -->
+        <div class="bg-white rounded-lg shadow-md mb-8 overflow-hidden">
+          <div class="bg-green-800 text-white p-4">
+            <h3 class="text-xl font-bold flex items-center">
+              <i class="fas fa-exchange-alt mr-2"></i>
+              Base64编码/解码
+            </h3>
+          </div>
+          <div class="p-6">
+            <div class="flex flex-wrap items-center mb-4">
+              <span class="bg-green-500 text-white text-sm font-semibold px-3 py-1 rounded mr-2 mb-2">GET</span>
+              <code class="bg-gray-100 px-3 py-1 rounded text-gray-800 font-mono mb-2">/base64encode</code>
+            </div>
+            <div class="flex flex-wrap items-center mb-4">
+              <span class="bg-green-500 text-white text-sm font-semibold px-3 py-1 rounded mr-2 mb-2">GET</span>
+              <code class="bg-gray-100 px-3 py-1 rounded text-gray-800 font-mono mb-2">/base64decode</code>
+            </div>
+            <p class="text-gray-600 mb-4">通过Base64编码或解码文本。</p>
+            
+            <div class="mb-4">
+              <h4 class="font-semibold mb-2">参数：</h4>
+              <ul class="list-disc pl-5 text-gray-600">
+                <li><code>text</code>（必需）：要编码或解码的文本。</li>
+              </ul>
+            </div>
+            
+            <div class="mb-4">
+              <h4 class="font-semibold mb-2">示例：</h4>
+              <div class="bg-gray-100 p-3 rounded font-mono text-sm mb-2">
+                <code>/base64encode?text=ciao</code>
+              </div>
+              <div class="bg-gray-100 p-3 rounded font-mono text-sm">
+                <code>/base64decode?text=5L2g5aW9</code>
+              </div>
+            </div>
+            
+            <div>
+              <h4 class="font-semibold mb-2">响应：</h4>
+              <pre class="language-json rounded"><code>{ "success": true, "base64": "5L2g5aW9" }</code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+<!-- FAQ Section -->
+<section class="py-12 md:py-20 bg-gray-100">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center mb-12">常见问题</h2>
+      
+      <div class="max-w-3xl mx-auto">
+        <div class="mb-6 bg-white p-6 rounded-lg shadow-md">
+          <h3 class="text-xl font-bold mb-2">需要API密钥吗？</h3>
+          <p class="text-gray-600">不需要，此API不需要任何身份验证或API密钥即可使用。</p>
+        </div>
+        
+        <div class="mb-6 bg-white p-6 rounded-lg shadow-md">
+          <h3 class="text-xl font-bold mb-2">有使用限制吗？</h3>
+          <p class="text-gray-600">为了确保所有人都能使用该服务，可能会应用一些频率限制。</p>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+  
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-gray-300 py-8">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="mb-4 md:mb-0">
+          <h2 class="text-xl font-bold text-white">Util.im API</h2>
+          <p class="mt-1">简单而强大的实用工具API</p>
+        </div>
+        <div class="flex space-x-4">
+          
+          <a href="https://github.com/1zkn/util.im" class="hover:text-white transition duration-200">GitHub</a>
+          
+        </div>
+      </div>
+      <div class="border-t border-gray-700 mt-6 pt-6 text-center md:text-left">
+        <p>&copy; 2025 Util.im API. 保留所有权利。</p>
+      </div>
+    </div>
+  </footer>
+    <!-- JavaScript -->
+    <script>
+        // Show more endpoints
+        document.getElementById('showMoreBtn').addEventListener('click', function() {
+          const moreEndpoints = document.getElementById('moreEndpoints');
+          const showMoreBtn = document.getElementById('showMoreBtn');
+          
+          if (moreEndpoints.classList.contains('hidden')) {
+            moreEndpoints.classList.remove('hidden');
+            showMoreBtn.textContent = 'Nascondi Endpoint Aggiuntivi';
+          } else {
+            moreEndpoints.classList.add('hidden');
+            showMoreBtn.textContent = 'Mostra Altri Endpoint';
+          }
+        });
+        
+    
+      </script>
+      <script>
+    
+        // Handle language change
+        document.getElementById('language-selector').addEventListener('change', function() {
+          const selectedLanguage = this.value;
+          
+          console.log('Language changed to:', selectedLanguage);
+          window.location.href = window.origin + '/docs/' + selectedLanguage;
+        });
+      </script>
+     </body>
